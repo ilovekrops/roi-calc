@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Slider from 'rc-slider';
 
-import './Step.css';
+import './Step.scss';
 import 'rc-slider/assets/index.css';
 
 const Handle = Slider.Handle;
@@ -10,7 +10,8 @@ const Handle = Slider.Handle;
 class Step extends Component {
 
   static propTypes = {
-    currentStep: PropTypes.number.isRequired
+    currentStep: PropTypes.number.isRequired,
+    updateParams: PropTypes.func
   }
 
   constructor(props) {
@@ -20,6 +21,7 @@ class Step extends Component {
       amount: 15000,
       cost: 20
     }
+    this.props.updateParams(this.values)
   }
 
   handleAmount = (props) => {
@@ -36,6 +38,7 @@ class Step extends Component {
   }
   setValue = (value, key) => {
     this.values[key] = value
+    this.props.updateParams(this.values)
     console.log('aaa', this.values)
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import './Indicators.css'
+import './Indicators.scss'
 
 class Indicators extends Component {
 
@@ -11,7 +11,6 @@ class Indicators extends Component {
 
   render() {
     const { number, currentStep } = this.props
-    console.log(currentStep)
 
     return(
       <div className="Indicators">

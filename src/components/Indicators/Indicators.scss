@@ -1,0 +1,39 @@
+.Indicators {
+  &-number {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+    color: #fff;
+    text-align: center;
+    background: rgba(184,196,213,0.9);
+    font-size: 15px;
+    line-height: 15px;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+
+    &::before{
+      content: '';
+      position: absolute;
+      top: 15px;;
+      left: -20px;
+      width: 20px;
+      height: 2px;
+      background: rgba(184,196,213,0.9);
+    }
+
+    &:first-child::before {
+      display: none;
+    }
+  }
+
+  &--isActive {
+    background: linear-gradient(-21deg, rgb(97, 186, 166), rgb(99, 189, 116));
+    border: 1px rgb(97, 186, 166);
+
+    &::before{
+      background: rgb(97, 186, 166);
+    }
+  }
+}

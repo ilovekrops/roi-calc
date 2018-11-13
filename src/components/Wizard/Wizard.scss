@@ -1,0 +1,39 @@
+@import "../../shared";
+
+.Wizard {
+  margin: 0 auto;
+
+  &-title {
+    font-size: 35px;
+    line-height: 23.56px;
+  }
+
+  &-subtitle {
+    font-size: 20px;
+    line-height: 31px;
+    margin: 55px auto 65px;
+    width: 50%;
+  }
+
+  &-content {
+    background-color: #fff;
+    color: #5B638B;
+    width: 70%;
+    margin: 0 auto 40px;
+  }
+
+  &-contentTitle {
+    font-size: 20px;
+    line-height: 24px;
+    padding: 30px 0;
+    border-bottom: 1px #5B638B solid;
+  }
+
+  &-contentQuestion {
+    padding: 30px 40px 20px;
+  }
+
+  &-button {
+    margin: 50px 20px 20px;
+  }
+}

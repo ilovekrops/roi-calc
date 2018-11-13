@@ -1,0 +1,32 @@
+.Step {
+  font-size: 17px;
+  line-height: 25px;
+
+  &-radio {
+    margin: 10px 0;
+  }
+
+  & .rc-slider-handle {
+    box-shadow: 0px 0px 5px 0px rgba(150,150,150,0.75);
+  }
+
+  & .rc-slider-handle-click-focused:focus {
+    box-shadow: 0px 0px 5px 0px rgba(150,150,150,0.75);
+  }
+
+  &-slider {
+    position: relative;
+  }
+
+  &-sliderMin, &-sliderMax {
+    position: absolute;
+    font-size: 14px;
+    color: #A8ABB6;
+  }
+  &-sliderMin {
+    left: 0;
+  }
+  &-sliderMax {
+    right: 0;
+  }
+}

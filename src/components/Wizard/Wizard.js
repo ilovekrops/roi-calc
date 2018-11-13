@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Step from '../Step/Step'
 import Indicators from '../Indicators/Indicators'
 
-import './Wizard.css';
+import './Wizard.scss';
 
 class Wizard extends Component {
 
@@ -22,11 +22,17 @@ class Wizard extends Component {
     this.state = {
       currentStep: 0
     };
+    this.params = {}
+  }
+
+  updateParams = (params) => {
+    this.params = params
   }
 
   nextStep = () => {
     const { currentStep } = this.state
-    if (currentStep <= 3) {
+    const { wizardLength } = this.props
+    if (currentStep <= wizardLength) {
       this.setState({
        currentStep: currentStep + 1
       })
@@ -35,7 +41,7 @@ class Wizard extends Component {
 
   prevStep = () => {
     const { currentStep } = this.state
-    if (currentStep > 0 ) {
+    if (currentStep > 0) {
       this.setState({
        currentStep: currentStep - 1
       })
@@ -44,13 +50,12 @@ class Wizard extends Component {
 
   submitWizard = () => {
     const { onSubmit } = this.props
-    if (onSubmit) onSubmit()
+    if (onSubmit) onSubmit(this.params)
   }
 
   render() {
     const { currentStep } = this.state
     const { wizardLength } = this.props
-    console.log('in Wizard', currentStep)
 
     return(
       <div className="Wizard">
@@ -65,10 +70,12 @@ class Wizard extends Component {
             Use the sliders to enter inputs
           </div>
           <div className="Wizard-contentQuestion">
-            <Step currentStep={currentStep} />
-            {currentStep !== 0 && <button className="App-button" onClick={ this.prevStep }>Prev</button> }
-            {currentStep !== (wizardLength - 1) && <button className="App-button" onClick={ this.nextStep }>Next</button> }
-            {currentStep === (wizardLength - 1) && <button className="App-button" onClick={ this.submitWizard }>Create Forecast</button> }
+            <Step currentStep={currentStep} updateParams={this.updateParams}/>
+            <div className="Wizard-buttons">
+              {currentStep !== 0 && <button className="Wizard-button button-primary" onClick={ this.prevStep }>Prev</button> }
+              {currentStep !== (wizardLength - 1) && <button className="Wizard-button button-primary" onClick={ this.nextStep }>Next</button> }
+              {currentStep === (wizardLength - 1) && <button className="Wizard-button button-primary" onClick={ this.submitWizard }>Create Forecast</button> }
+            </div>
           </div>
         </div>
         <Indicators
