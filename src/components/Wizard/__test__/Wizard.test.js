@@ -3,10 +3,24 @@ import Wizard from '../Wizard';
 import Indicators from '../../Indicators/Indicators';
 import { shallow, mount } from 'enzyme';
 
+jest.mock('../../../history', () => ({
+  push: jest.fn()
+}))
+import history from '../../../history'
+
 describe('<Wizard/>', () => {
   const initialProps = {
-    wizardLength: 3
+    wizardLength: 3,
+    path: 'step',
+    match: {
+      params: {
+        id: '1'
+      }
+    }
   }
+  beforeEach(() => {
+    jest.resetAllMocks()
+  })
   describe('@renders', () => {
     it('should render initial state', () => {
       const wrapper = shallow(<Wizard {...initialProps}/>)
@@ -32,11 +46,24 @@ describe('<Wizard/>', () => {
       expect(wrapper.find('.Wizard-button').at(1).text()).toBe('Create Forecast')
     })
   })
-  describe('@on load', () => {
-    it('should set initial values', () => {
-      const wrapper = shallow(<Wizard {...initialProps}/>)
-      expect(wrapper.state().currentStep).toBe(0)
-      expect(wrapper.instance().params).toEqual({})
+  describe('@lifecycle', () => {
+    describe('constructor', () => {
+      it('should set initial values', () => {
+        const wrapper = shallow(<Wizard {...initialProps}/>)
+        expect(wrapper.state().currentStep).toBe(0)
+        expect(wrapper.instance().params).toEqual({})
+      })
+    })
+    describe('componentDidUpdate', () => {
+      it('should change currentStep if diffenert param', () => {
+        const wrapper = shallow(<Wizard {...initialProps}/>)
+        expect(wrapper.state().currentStep).toBe(0)
+        wrapper.instance().componentDidUpdate({ match: { params: { id: '2' } } })
+        setTimeout(() => {
+          expect(wrapper.state().currentStep).toBe(1)
+
+        })
+      })
     })
   })
   describe('@events', () => {
@@ -50,28 +77,56 @@ describe('<Wizard/>', () => {
       })
     })
     describe('nextStep', () => {
-      it('should change currentStep to next one', () => {
+      it('should go to next step page', () => {
         const wrapper = shallow(<Wizard {...initialProps}/>)
         wrapper.find('.Wizard-buttonNext').simulate('click')
-        expect(wrapper.state().currentStep).toBe(1)
+        expect(history.push).toHaveBeenCalledTimes(1)
+        expect(history.push).toHaveBeenCalledWith('/step/2')
       })
-      it('should not change currentStep to next one if last one', () => {
-        const wrapper = shallow(<Wizard {...initialProps}/>)
-        wrapper.setState({currentStep: 2})
+      it('should not go to next one if last one', () => {
+        const props = {
+          wizardLength: 3,
+          path: 'step',
+          match: {
+            params: {
+              id: '3'
+            }
+          }
+        }
+        const wrapper = shallow(<Wizard {...props}/>)
         wrapper.instance().nextStep()
-        expect(wrapper.state().currentStep).toBe(2)
+        expect(history.push).not.toHaveBeenCalled()
       })
     })
     describe('prevStep', () => {
-      it('should change currentStep to prev one', () => {
-        const wrapper = shallow(<Wizard {...initialProps}/>)
-        wrapper.setState({currentStep: 2})
+      it('should go to next step page', () => {
+        const props = {
+          wizardLength: 3,
+          path: 'step',
+          match: {
+            params: {
+              id: '3'
+            }
+          }
+        }
+        const wrapper = shallow(<Wizard {...props}/>)
         wrapper.find('.Wizard-buttonPrev').simulate('click')
-        expect(wrapper.state().currentStep).toBe(1)
+        expect(history.push).toHaveBeenCalledTimes(1)
+        expect(history.push).toHaveBeenCalledWith('/step/2')
       })
-      it('should not change currentStep to next one if last one', () => {
+      it('should not go to prev page if first one', () => {
+        const props = {
+          wizardLength: 3,
+          path: 'step',
+          match: {
+            params: {
+              id: '1'
+            }
+          }
+        }
         const wrapper = shallow(<Wizard {...initialProps}/>)
         wrapper.instance().prevStep()
+        expect(history.push).not.toHaveBeenCalled()
         expect(wrapper.state().currentStep).toBe(0)
       })
     })

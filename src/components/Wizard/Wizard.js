@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import history from '../../history'
 
 import Step from '../Step/Step'
 import Indicators from '../Indicators/Indicators'
@@ -10,7 +11,8 @@ class Wizard extends Component {
 
   static propTypes = {
     onSubmit: PropTypes.func,
-    wizardLength: PropTypes.number.isRequired
+    wizardLength: PropTypes.number.isRequired,
+    path: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -20,9 +22,17 @@ class Wizard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 0
+      currentStep: parseInt(props.match.params.id, 10) - 1
     };
     this.params = {}
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.setState({
+        currentStep: parseInt(this.props.match.params.id, 10) - 1
+      })
+    }
   }
 
   updateParams = (params) => {
@@ -31,20 +41,17 @@ class Wizard extends Component {
 
   nextStep = () => {
     const { currentStep } = this.state
-    const { wizardLength } = this.props
+    const { wizardLength, path } = this.props
     if (currentStep < wizardLength - 1) {
-      this.setState({
-        currentStep: currentStep + 1
-      })
+      history.push(`/${path}/${currentStep + 2}`)
     }
   }
 
   prevStep = () => {
     const { currentStep } = this.state
+    const { path } = this.props
     if (currentStep > 0) {
-      this.setState({
-       currentStep: currentStep - 1
-      })
+      history.push(`/${path}/${currentStep}`)
     }
   }
 

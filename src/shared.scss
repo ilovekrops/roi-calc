@@ -1,22 +1,35 @@
+$primary-text-color: #fff;
+
 .button-primary {
   width: auto;
-  color: #fff;
+  color: $primary-text-color;
   font-size: 20px;
   display: inline-block;
   padding: 15px 35px;
   background: linear-gradient(-21deg, rgb(97, 186, 166), rgb(99, 189, 116));
   border: 1px rgb(97, 186, 166) solid;
   border-radius: 32px;
+
+  & a {
+    text-decoration: none;
+    color: $primary-text-color;
+  }
 }
 
 .button-primary:hover {
   cursor: pointer;
   color: #61baa6;
   background: #fff;
+
+  & a {
+    color: #61baa6;
+  }
 }
 
 .button-primary:focus {
     outline: none;
 }
 
-$primary-text-color: #fff;
+.bold {
+  font-weight: bold;
+}

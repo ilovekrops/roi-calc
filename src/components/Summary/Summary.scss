@@ -1,0 +1,49 @@
+@import "../../shared";
+
+.Summary {
+  width: 50%;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    margin: 30px auto;
+    line-height: 25px;
+  }
+
+  &-percentage {
+    animation-name: color2;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+  }
+
+  &-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    td {
+      border-bottom: 1px solid $primary-text-color;
+      font-size: 16px;
+      padding: 14px 8px;
+    }
+  }
+}
+
+@-webkit-keyframes color2 {
+    0% {
+    }
+    5%,25% {
+        text-shadow: -2px -5px 10px #61baa6,
+                     -5px 0px 10px #74d386,
+                     -5px 5px 10px #63bd74;
+    }
+    15%,35% {
+        text-shadow: 2px 5px 10px #61baa6,
+                     5px 0px 10px #74d386,
+                     5px -5px 10px #63bd74;
+    }
+    40% {
+      text-shadow: none;
+  }
+}
