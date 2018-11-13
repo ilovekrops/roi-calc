@@ -1,10 +1,10 @@
-@import "shared";
+@import "../../shared";
 
 @font-face {
   font-family: Geomanist;
-  src: url('./fonts/Geomanist/geomanist-regular-webfont.woff2') format('woff2'),
-       url('./fonts/Geomanist/geomanist-regular-webfont.woff') format('woff'),
-       url('./fonts/Geomanist/geomanist-regular-webfont.ttf') format('ttf');
+  src: url('../../fonts/Geomanist/geomanist-regular-webfont.woff2') format('woff2'),
+       url('../../fonts/Geomanist/geomanist-regular-webfont.woff') format('woff'),
+       url('../../fonts/Geomanist/geomanist-regular-webfont.ttf') format('ttf');
 }
 
 .App {
@@ -15,8 +15,9 @@
   color: $primary-text-color;
   display: flex;
   align-items: center;
-  background-image: url('images/background.jpg');
+  background-image: url('../../images/background.jpg');
   background-repeat: no-repeat;
+  background-position: bottom;
   background-size: cover;
 
   &-title {
@@ -60,6 +61,12 @@
     }
   }
 
+  &-percentage {
+    animation-name: color2;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+  }
+
   &-summaryTable {
     border-collapse: collapse;
     margin: 0 auto;
@@ -71,5 +78,23 @@
       font-size: 16px;
       padding: 14px 8px;
     }
+  }
+}
+
+@-webkit-keyframes color2 {
+    0% {
+    }
+    5%,25% {
+        text-shadow: -2px -5px 10px #61baa6,
+                     -5px 0px 10px #74d386,
+                     -5px 5px 10px #63bd74;
+    }
+    15%,35% {
+        text-shadow: 2px 5px 10px #61baa6,
+                     5px 0px 10px #74d386,
+                     5px -5px 10px #63bd74;
+    }
+    40% {
+      text-shadow: none;
   }
 }

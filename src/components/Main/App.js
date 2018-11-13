@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss'
 
-import Wizard from './components/Wizard/Wizard'
+import Wizard from '../Wizard/Wizard'
 
 class App extends Component {
 
@@ -63,7 +63,7 @@ class App extends Component {
         }
         { page === 'summary' &&
           <div className="App-summary">
-            <h2>IMPROVE YOUR PROFITS BY <span className="App--bold">{data.percentage}%</span> WITH CLEENG!</h2>
+            <h2>IMPROVE YOUR PROFITS BY <span className="App--bold App-percentage">{data.percentage}%</span> WITH CLEENG!</h2>
             <p>Based on your entries, we estimate that you could generate <span className="App--bold">${this.convertNumber(data.profit)}</span> more in profits from your success-bound Cleeng event.</p>
             <table className="App-summaryTable">
               <tbody>
