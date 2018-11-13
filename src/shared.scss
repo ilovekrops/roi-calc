@@ -9,21 +9,14 @@ $primary-text-color: #fff;
   background: linear-gradient(-21deg, rgb(97, 186, 166), rgb(99, 189, 116));
   border: 1px rgb(97, 186, 166) solid;
   border-radius: 32px;
+  text-decoration: none;
 
-  & a {
-    text-decoration: none;
-    color: $primary-text-color;
-  }
 }
 
 .button-primary:hover {
   cursor: pointer;
   color: #61baa6;
   background: #fff;
-
-  & a {
-    color: #61baa6;
-  }
 }
 
 .button-primary:focus {

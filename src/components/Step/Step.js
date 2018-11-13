@@ -25,7 +25,7 @@ class Step extends Component {
   }
 
   handleAmount = (props) => {
-    const { value,...restProps } = props;
+    const { value, ...restProps } = props;
     return (
       <Handle value={value} {...restProps}>{value / 1000}k</Handle>
     );

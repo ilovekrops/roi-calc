@@ -45,12 +45,12 @@ class Summary extends Component {
           </tbody>
         </table>
         <p>Do you want to understand the logic behind this calculation? Grab your results and we will explain you everything about conversion rates, customer care and operation fees.</p>
-        <button
+        <Link
+          to="/"
           className="Summary-button button-primary"
-          type="button"
         >
-          <Link to="/">Start Again</Link>
-        </button>
+          Start Again
+        </Link>
       </div>
     );
   }
