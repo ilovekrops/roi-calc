@@ -32,9 +32,9 @@ class Wizard extends Component {
   nextStep = () => {
     const { currentStep } = this.state
     const { wizardLength } = this.props
-    if (currentStep <= wizardLength) {
+    if (currentStep < wizardLength - 1) {
       this.setState({
-       currentStep: currentStep + 1
+        currentStep: currentStep + 1
       })
     }
   }
@@ -72,9 +72,9 @@ class Wizard extends Component {
           <div className="Wizard-contentQuestion">
             <Step currentStep={currentStep} updateParams={this.updateParams}/>
             <div className="Wizard-buttons">
-              {currentStep !== 0 && <button className="Wizard-button button-primary" onClick={ this.prevStep }>Prev</button> }
-              {currentStep !== (wizardLength - 1) && <button className="Wizard-button button-primary" onClick={ this.nextStep }>Next</button> }
-              {currentStep === (wizardLength - 1) && <button className="Wizard-button button-primary" onClick={ this.submitWizard }>Create Forecast</button> }
+              {currentStep !== 0 && <button className="Wizard-button Wizard-buttonPrev button-primary" onClick={ this.prevStep }>Prev</button> }
+              {currentStep !== (wizardLength - 1) && <button className="Wizard-button Wizard-buttonNext button-primary" onClick={ this.nextStep }>Next</button> }
+              {currentStep === (wizardLength - 1) && <button className="Wizard-button Wizard-buttonSubmit button-primary" onClick={ this.submitWizard }>Create Forecast</button> }
             </div>
           </div>
         </div>
